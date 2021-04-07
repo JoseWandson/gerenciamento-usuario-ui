@@ -1,0 +1,64 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{editando ? 'Edição de' : 'Novo'}} Usuário</h1>
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" #nome="ngModel" required [(ngModel)]="usuario.nome">
+        <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>CPF</label>
+        <p-inputMask mask="999.999.999-99" name="cpf" #cpf="ngModel" required [(ngModel)]="usuario.cpf">
+        </p-inputMask>
+        <app-message [control]="cpf" error="required" text="Informe o CPF"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>Data de Nascimento</label>
+        <p-calendar dateFormat="dd/mm/yy" name="dataNascimento" [(ngModel)]="usuario.dataNascimento"
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="1921:2021">
+        </p-calendar>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>Sexo</label>
+        <div class="p-formgroup-inline">
+          <div class="p-field-checkbox">
+            <p-radioButton name="sexo" value="M" [(ngModel)]="usuario.sexo" inputId="m"></p-radioButton>
+            <label for="m">M</label>
+          </div>
+          <div class="p-field-checkbox">
+            <p-radioButton name="sexo" value="F" [(ngModel)]="usuario.sexo" inputId="f"></p-radioButton>
+            <label for="f">F</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Cargo</label>
+        <p-dropdown [options]="cargos" placeholder="Selecione" name="cargo" #cargo="ngModel" [(ngModel)]="usuario.cargo"
+          required>
+        </p-dropdown>
+        <app-message [control]="cargo" error="required" text="Informe o Cargo"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Perfil</label>
+        <p-multiSelect [options]="perfis" [(ngModel)]="usuario.perfis" defaultLabel="Selecione"
+          selectedItemsLabel="{0} itens selecionados" name="perfil" emptyFilterMessage="Nenhum resultado encontrado">
+        </p-multiSelect>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" class="p-mr-1" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info p-ml-1 p-mr-1" (click)="novo(f)"></button>
+        <a routerLink="/usuarios" class="p-ml-1">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <p-table [value]="perfis" [paginator]="true" rows="5" [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)" [responsive]="true" #tabela styleClass="p-datatable-gridlines p-mt-6">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th class="col-acoes-header"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-perfil>
+          <tr>
+            <td>{{perfil.nome}}</td>
+            <td class="col-acoes">
+              <a pButton class="p-mr-1" icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/perfis', perfil.codigo]"></a>
+              <button pButton class="p-ml-1" icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(perfil)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="2">Nenhum perfil encontrado</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="p-col-12">
+      <a pButton label="Novo Perfil" routerLink="/perfis/novo"></a>
+    </div>
+  </div>
+</div>

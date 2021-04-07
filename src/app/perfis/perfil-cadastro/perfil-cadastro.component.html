@@ -1,0 +1,21 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{editando ? 'Edição de' : 'Novo'}} Perfil</h1>
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" #nome="ngModel" required [(ngModel)]="perfil.nome">
+        <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" class="p-mr-1" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info p-ml-1 p-mr-1" (click)="novo(f)"></button>
+        <a routerLink="/perfis" class="p-ml-1">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>
